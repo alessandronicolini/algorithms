@@ -3,7 +3,7 @@
 
 #define N 8
 
-void selection_sort(int *arr, int n) {
+void selection_sort(int *arr, int n, Order ord) {
 
     int m_value, m_pos, temp;
 
@@ -15,10 +15,20 @@ void selection_sort(int *arr, int n) {
         m_pos = i;
         
         // loop over the right unordered subarray and find the m (min or max)
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < m_value) 
-                m_value = arr[j];
-                m_pos = j;
+        // according the sorting order
+        if (ord == ORDER_ASC) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < m_value) {
+                    m_value = arr[j];
+                    m_pos = j;
+                }
+            }
+        } else {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] > m_value) {
+                    m_value = arr[j];
+                    m_pos = j;
+                }
             }
         }
         
@@ -38,7 +48,12 @@ int main(void) {
     print_array(arr, N);
     printf("\n");
 
-    selection_sort(arr, N);
+    selection_sort(arr, N, ORDER_ASC);
     printf("SORTED (ASC order):\n");
+    print_array(arr, N);
+    printf("\n");
+
+    selection_sort(arr, N, ORDER_DESC);
+    printf("SORTED (DESC order):\n");
     print_array(arr, N);
 }
