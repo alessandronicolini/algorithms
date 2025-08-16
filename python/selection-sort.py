@@ -7,7 +7,7 @@ class Order(Enum):
     ASC = 0
     DESC = 1
 
-def selection_sort(arr: List[int], ord: Order) -> None:
+def selection_sort(arr: List[int], ord = Order.ASC) -> None:
     m_value: int
     m_pos: int
     temp: int
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     print(f"arr{arr}")
     print()
 
-    selection_sort(arr, Order.ASC)
+    selection_sort(arr)
     print("INPUT SORTED (ASC order):")
     print(f"arr{arr}")
     print()
