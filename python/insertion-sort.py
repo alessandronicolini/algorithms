@@ -1,11 +1,7 @@
 from typing import List
 from enum import Enum, unique, auto
+from utils import Order
 import operator
-
-@unique
-class Order(Enum):
-    ASC = auto()
-    DESC = auto()
 
 
 def insertion_sort(arr: List[int], ord = Order.ASC):

@@ -1,11 +1,8 @@
 from typing import List
 from enum import Enum, unique
+from utils import Order
 import operator
 
-@unique
-class Order(Enum):
-    ASC = 0
-    DESC = 1
 
 def selection_sort(arr: List[int], ord = Order.ASC) -> None:
     m_value: int
