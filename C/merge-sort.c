@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "utils.h"
+#include <stdbool.h>
+
 #define N 10
 
 void 
-merge(int *arr, int l_idx, int m_idx, int r_idx)
+merge(int *arr, int l_idx, int m_idx, int r_idx, bool ascending)
 {
     // define left array
     int left_len = m_idx - l_idx + 1;
@@ -27,7 +29,10 @@ merge(int *arr, int l_idx, int m_idx, int r_idx)
 
     // while both subarrays have elements
     while (i < left_len && j < right_len) { 
-        if (left_arr[i] <= right_arr[j]) {
+        if (
+            (ascending && left_arr[i] <= right_arr[j]) || 
+            (!ascending && left_arr[i] > right_arr[j])
+        ){
             arr[k++] = left_arr[i++];
         } else {
             arr[k++] = right_arr[j++];
@@ -44,27 +49,35 @@ merge(int *arr, int l_idx, int m_idx, int r_idx)
     }
 }
 
-
 void
-merge_sort(int *arr, int l_idx, int r_idx)
+merge_sort(int *arr, int l_idx, int r_idx, bool ascending)
 {
     if (r_idx - l_idx == 0) return;
 
     int m_idx = (r_idx - l_idx) / 2 + l_idx;
-    merge_sort(arr, l_idx, m_idx);
-    merge_sort(arr, m_idx + 1, r_idx);
-    merge(arr, l_idx, m_idx, r_idx);
+    merge_sort(arr, l_idx, m_idx, ascending);
+    merge_sort(arr, m_idx + 1, r_idx, ascending);
+    merge(arr, l_idx, m_idx, r_idx, ascending);
 }
 
 int 
 main(void)
-{
+{   
+    bool ascending = true;
+
     int arr[N] = {2, 3, -3, 6, 5, -5, 10, 32, 4, 8};
     printf("PROBLEM INPUT:\n");
     print_array(arr, N);
+
     printf("\n");
     
     printf("INPUT SORTED (ASC order):\n");
-    merge_sort(arr, 0, N - 1);
-    print_array(arr, N); 
+    merge_sort(arr, 0, N - 1, ascending); 
+    print_array(arr, N);
+
+    printf("\n");
+
+    printf("INPUT SORTED (DESC order):\n");
+    merge_sort(arr, 0, N - 1, !ascending);
+    print_array(arr, N);
 }
