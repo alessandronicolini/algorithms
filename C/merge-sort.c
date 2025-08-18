@@ -63,7 +63,8 @@ merge_sort(int *arr, int l_idx, int r_idx, bool ascending)
 int 
 main(void)
 {   
-    bool ascending = true;
+    bool asc_order = true;
+    bool desc_order = !asc_order;
 
     int arr[N] = {2, 3, -3, 6, 5, -5, 10, 32, 4, 8};
     printf("PROBLEM INPUT:\n");
@@ -72,12 +73,12 @@ main(void)
     printf("\n");
     
     printf("INPUT SORTED (ASC order):\n");
-    merge_sort(arr, 0, N - 1, ascending); 
+    merge_sort(arr, 0, N - 1, asc_order); 
     print_array(arr, N);
 
     printf("\n");
 
     printf("INPUT SORTED (DESC order):\n");
-    merge_sort(arr, 0, N - 1, !ascending);
+    merge_sort(arr, 0, N - 1, desc_order);
     print_array(arr, N);
 }
