@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "utils.h"
+#include <stdbool.h>
+
 #define N 10
 
-void insertion_sort(int *arr, int n, Order order) {
+void insertion_sort(int *arr, int n, bool ascending) {
     for (int j = 1; j < n; j++) {
         int key = arr[j];
 
@@ -13,45 +15,38 @@ void insertion_sort(int *arr, int n, Order order) {
         // by translating the elements on the right until 
         // the insertion point is found
         // (changing > to < change the sorting order)
-        if (order == ORDER_ASC) {
-            while (i >= 0 && arr[i] > key) {
-                arr[i + 1] = arr[i];
-                i--;
-            }
-        } else {
-            while (i >= 0 && arr[i] < key) {
-                arr[i + 1] = arr[i];
-                i--;
-            }
+        while (
+            i >= 0 && (
+                (ascending && arr[i] > key) ||
+                (!ascending && arr[i] <= key)
+            )
+        ) {
+            arr[i + 1] = arr[i];
+            i--;
         }
-
+        
         arr[i + 1] = key;
     }
 }
 
-void insertion_sort_asc(int *arr, int n) {
-    insertion_sort(arr, n, ORDER_ASC);
-}
-
-void insertion_sort_desc(int *arr, int n) {
-    insertion_sort(arr, n, ORDER_DESC);
-}
-
 int main(void) {
     int arr[N] = {2,5,4,1,7,9,6,2,6,8};
+
+    bool asc_order = true;
+    bool desc_order = !asc_order;
 
     printf("PROBLEM INPUT:\n");
     print_array(arr, N);
 
     printf("\n");
 
-    insertion_sort_asc(arr, N);
+    insertion_sort(arr, N, asc_order);
     printf("SORTED  (ASC order):\n");
     print_array(arr, N);
     
     printf("\n");
 
-    insertion_sort_desc(arr, N);
+    insertion_sort(arr, N, desc_order);
     printf("SORTED (DESC order):\n");
     print_array(arr, N);
 
