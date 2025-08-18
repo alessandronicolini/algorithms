@@ -4,7 +4,9 @@
 
 #define N 10
 
-void insertion_sort(int *arr, int n, bool ascending) {
+void
+insertion_sort(int *arr, int n, bool ascending)
+{
     for (int j = 1; j < n; j++) {
         int key = arr[j];
 
@@ -29,7 +31,9 @@ void insertion_sort(int *arr, int n, bool ascending) {
     }
 }
 
-int main(void) {
+int 
+main(void)
+{
     int arr[N] = {2,5,4,1,7,9,6,2,6,8};
 
     bool asc_order = true;

@@ -4,7 +4,9 @@
 
 #define N 8
 
-void selection_sort(int *arr, int n, bool ascending) {
+void
+selection_sort(int *arr, int n, bool ascending)
+{
 
     int m_value, m_pos, temp;
 
@@ -38,7 +40,9 @@ void selection_sort(int *arr, int n, bool ascending) {
     }
 }
 
-int main(void) {
+int
+main(void)
+{
     bool asc_order = true;
     bool desc_order = !asc_order;
 
