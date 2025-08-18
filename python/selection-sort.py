@@ -35,7 +35,7 @@ def selection_sort(arr: List[int], ascending: bool = True) -> None:
     if ascending:
         comp = (lambda x, y: x < y)
     else:
-        comp = (lambda x, y: x > y)
+        comp = (lambda x, y: x >= y)
 
     for i in range(len(arr) - 1):
         m_pos = i
